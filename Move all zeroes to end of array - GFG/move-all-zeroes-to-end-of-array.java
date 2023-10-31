@@ -33,21 +33,29 @@ public class Main {
 //User function Template for Java
 
 class Solution {
-    void pushZerosToEnd(int[] arr, int n) {
+    void swap(int n1,int n2,int arr[]){  //Swap Function
+            int temp=arr[n1];
+            arr[n1]=arr[n2];
+            arr[n2]=temp;
+        }
+    void pushZerosToEnd(int[] arr, int n) { 
         // code here
-        int cnt=0;
-        for(int i=0;i<n;i++)
-        {
-            if(arr[i]!=0)
-            {
-                arr[cnt]=arr[i];
-                cnt++;
+        int nonZero=0;
+        int Zero=0;
+        if(arr.length==0||arr.length==1){ //Base Case
+            return;
+        }
+        while(nonZero<arr.length){
+            if(arr[nonZero]!=0){
+                swap(nonZero,Zero,arr);
+                nonZero++;
+                Zero++;
+            }
+            else{
+                nonZero++;
             }
         }
+       
         
-        for(int i=cnt;i<n;i++)
-        {
-            arr[i]=0;
-        }
     }
 }
