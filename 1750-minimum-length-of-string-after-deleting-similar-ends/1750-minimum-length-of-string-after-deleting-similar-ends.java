@@ -14,6 +14,6 @@ class Solution {
                 right--;
             }
         }
-        return Math.max(0,right-left+1);
+        return right-left+1;
     }
 }
