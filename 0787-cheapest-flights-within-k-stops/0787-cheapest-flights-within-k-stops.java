@@ -1,37 +1,62 @@
+class Pair{
+    int first;
+    int second;
+    public Pair(int f,int s)
+    {
+        this.first=f;
+        this.second=s;
+    }
+}
+class Tuple{
+    int first,second,third;
+    public Tuple(int f,int s,int t)
+    {
+        this.first=f;
+        this.second=s;
+        this.third=t;
+    }
+}
 class Solution {
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-               Map<Integer, List<int[]>> adj = new HashMap<>();
-        int[] visited = new int[n];
-        Arrays.fill(visited, Integer.MAX_VALUE);
-        visited[src] = 0;
-        
-        for (int[] flight : flights) {
-            adj.computeIfAbsent(flight[0], key -> new ArrayList<>()).add(new int[]{flight[1], flight[2]});
+        ArrayList<ArrayList<Pair>> adj=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            adj.add(new ArrayList<>());
         }
-        
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{src, 0});
-        k++;
-        
-        while (!queue.isEmpty() && k-- > 0) {
-            int size = queue.size();
-            while (size-- > 0) {
-                int[] curr = queue.poll();
-                int currNode = curr[0];
-                int currPrice = curr[1];
-                if (adj.containsKey(currNode)) {
-                    for (int[] neighbor : adj.get(currNode)) {
-                        int newPrice = currPrice + neighbor[1];
-                        if (newPrice < visited[neighbor[0]]) {
-                            visited[neighbor[0]] = newPrice;
-                            queue.offer(new int[]{neighbor[0], newPrice});
-                        }
-                    }
+        int m=flights.length;
+        for(int i=0;i<m;i++)
+        {
+            adj.get(flights[i][0]).add(new Pair(flights[i][1],flights[i][2]));
+        }
+        Queue<Tuple> q=new LinkedList<>();
+        q.add(new Tuple(0,src,0)); //stops,node,cost
+        int[] dist=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            dist[i]=(int)(1e9);
+        }
+        dist[src]=0;
+        while(!q.isEmpty())
+        {
+            Tuple it=q.peek();
+            q.remove();
+            int stops=it.first;
+            int node=it.second;
+            int cost=it.third;
+            if(stops>k) continue;
+            for(Pair iter:adj.get(node))
+            {
+                int adjNode=iter.first;
+                int edgeW=iter.second;
+                if(cost+edgeW<dist[adjNode] && stops<=k)
+                {
+                    dist[adjNode]=cost+edgeW;
+                    q.add(new Tuple(stops+1,adjNode,cost+edgeW));
                 }
             }
         }
-        
-        return visited[dst] == Integer.MAX_VALUE ? -1 : visited[dst];
+        if(dist[dst]==(int)(1e9)) return -1;
+        return dist[dst];
     }
 }
         
