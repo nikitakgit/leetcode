@@ -8,29 +8,28 @@ class Solution {
         }
         return ans;
     }
-    public int search(int[] nums,int target,boolean findStartIndex)
+    
+    public int search(int[] nums,int target,boolean findFirstIndex)
     {
+        int s=0;
+        int e=nums.length-1;
         int ans=-1;
-        int start=0;
-        int end=nums.length-1;
-        while(start<=end)
+        while(s<=e)
         {
-            int mid=start+(end-start)/2;
-            if(target>nums[mid])
+            int mid=s+(e-s)/2;
+            if(target<nums[mid])
             {
-                start=mid+1;
-            }else if(target<nums[mid])
+                e=mid-1;
+            }else if(target>nums[mid])
             {
-                end=mid-1;
-            }else
-            {
+                s=mid+1;
+            }else{
                 ans=mid;
-                if(findStartIndex)
+                if(findFirstIndex)
                 {
-                    end=mid-1;
-                }else
-                {
-                    start=mid+1;
+                    e=mid-1;
+                }else{
+                    s=mid+1;
                 }
             }
         }
