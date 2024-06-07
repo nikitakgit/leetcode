@@ -1,3 +1,4 @@
+//using disjoint set
 class Solution {
     public int findCircleNum(int[][] isConnected) {
        djs(isConnected.length);
