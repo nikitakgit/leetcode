@@ -17,9 +17,8 @@ class Solution {
             even.add(it);
         }
         
-        int n=even.size();
-        int[] ans=new int[n];
-        for(int i=0;i<n;i++)
+        int[] ans=new int[nums.length];
+        for(int i=0;i<nums.length;i++)
         {
             ans[i]=even.get(i);
         }
