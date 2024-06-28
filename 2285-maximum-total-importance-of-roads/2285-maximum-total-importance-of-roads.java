@@ -1,3 +1,15 @@
+public class City{
+    int ind;
+    int degree;
+    
+    public City(int ind,int degree)
+    {
+        this.ind=ind;
+        this.degree=degree;
+    }
+    
+}
+
 class Solution {
     public long maximumImportance(int n, int[][] roads) {
         //Array to store degree of each city
@@ -11,25 +23,19 @@ class Solution {
         }
         
         //create a list of cities and sort by degree
-        Integer[] cities=new Integer[n];
+        City[] cities=new City[n];
         for(int i=0;i<n;i++)
         {
-            cities[i]=i;
+            cities[i]=new City(i,degree[i]);
         }
         
-        Arrays.sort(cities,new Comparator<Integer>()
-                    {
-                        public int compare(Integer a,Integer b)
-                        {
-                            return Integer.compare(degree[b],degree[a]);
-                        }
-                    });
+        Arrays.sort(cities,(a,b)->b.degree-a.degree);
         
         //Assign values to cities starting from highest degree
         long totImp=0;
         for(int i=0;i<n;i++)
         {
-            totImp+=(long)(n-i)*degree[cities[i]];
+            totImp+=(long)(n-i)*cities[i].degree;
         }
        return totImp;
     }
