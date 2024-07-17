@@ -1,39 +1,45 @@
 //using disjoint set
 class Solution {
     public int findCircleNum(int[][] isConnected) {
-       djs(isConnected.length);
-        for(int i=0 ; i<isConnected.length; i++){
-            for(int j=0 ; j<isConnected[i].length ;j++){
-                if(isConnected[i][j]==1){
-                    union(i,j);
+       ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
+        for(int i=0;i<isConnected.length;i++)
+        {
+            adj.add(new ArrayList<>());
+        }
+        
+        for(int i=0;i<isConnected.length;i++)
+        {
+            for(int j=0;j<isConnected.length;j++)
+            {
+                if(isConnected[i][j]==1 && i!=j)
+                {
+                    adj.get(i).add(j);
+                    adj.get(j).add(i);
                 }
             }
         }
-        HashSet<Integer> set = new HashSet<>();
-        for(int i=0 ; i<isConnected.length ; i++){
-            set.add(find(i));
+        
+        int[] vis=new int[adj.size()];
+        int cnt=0;
+        for(int i=0;i<adj.size();i++)
+        {
+            if(vis[i]==0)
+            {
+                cnt++;
+                dfs(i,vis,adj);
+            }
         }
-        return set.size();
+        return cnt;
     }
-    int [] parent = new int [200];
-    void djs(int n){
-        for(int i=0 ; i<n ;i++){
-            parent[i]=i;
+    public void dfs(int node,int[] vis,ArrayList<ArrayList<Integer>> adj)
+    {
+        vis[node]=1;
+        for(int i:adj.get(node))
+        {
+            if(vis[i]==0)
+            {
+                dfs(i,vis,adj);
+            }
         }
-    }
-    int find(int node){
-        if(node == parent[node]){
-            return node;
-        }
-        return parent[node] = find(parent[node]);
-    }
-    boolean union(int u, int v){
-        u = find(u);
-        v = find(v);
-        if(u!=v){
-            parent[v] = u;
-            return true;
-        }
-        return false;
     }
 }
