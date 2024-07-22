@@ -1,32 +1,33 @@
 class Solution {
     public List<List<String>> partition(String s) {
-        List<List<String>> ans=new ArrayList<>();
-        helper(s,0,new ArrayList<>(),ans);
+      List<List<String>> ans=new ArrayList<>();
+        helper(0,s,new ArrayList<>(),ans);
         return ans;
     }
-    public void helper(String s,int i,List<String> path,List<List<String>> ans)
+    public void helper(int ind,String s,List<String> path,List<List<String>> ans)
     {
-        if(i==s.length())
+        if(ind==s.length())
         {
             ans.add(new ArrayList<>(path));
             return;
         }
         
-        for(int j=i+1;j<=s.length();j++)
+        for(int i=ind;i<s.length();i++)
         {
-            if(isPalindrome(s,i,j-1))
+            if(isPalindrome(s,ind,i))
             {
-                path.add(s.substring(i,j));
-                helper(s,j,path,ans);
+                path.add(s.substring(ind,i+1));
+                helper(i+1,s,path,ans);
                 path.remove(path.size()-1);
             }
         }
+        
     }
-    public boolean isPalindrome(String s,int left,int right)
+    public boolean isPalindrome(String s,int start,int end)
     {
-        while(left<right)
+        while(start<=end)
         {
-            if(s.charAt(left++)!=s.charAt(right--))
+            if(s.charAt(start++)!=s.charAt(end--))
             {
                 return false;
             }
