@@ -1,23 +1,21 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-       List<List<Integer>> result = new ArrayList<>();
-        List<Integer> curr = new ArrayList<>();
-        explore(nums, 0, curr, result);
-        return result;
+     List<List<Integer>> ans=new ArrayList<>();
+        helper(0,nums,nums.length,ans,new ArrayList<>());
+        return ans;
     }
-
-    private void explore(int[] nums, int index, List<Integer> curr, List<List<Integer>> result) {
-        if (index == nums.length) {
-            result.add(new ArrayList<>(curr));
+    public void helper(int i,int[] nums,int n,List<List<Integer>> ans,List<Integer> ds)
+    {
+        if(i==n)
+        {
+            ans.add(new ArrayList<>(ds));
             return;
         }
-
-        // Include the current element
-        curr.add(nums[index]);
-        explore(nums, index + 1, curr, result);
-        curr.remove(curr.size() - 1); // Backtrack
-
-        // Exclude the current element
-        explore(nums, index + 1, curr, result);
+        
+        ds.add(nums[i]);
+        helper(i+1,nums,n,ans,ds);
+        ds.remove(ds.size()-1);
+        
+        helper(i+1,nums,n,ans,ds);
     }
 }
