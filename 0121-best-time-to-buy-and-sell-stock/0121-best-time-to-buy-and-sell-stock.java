@@ -4,8 +4,8 @@ class Solution {
         int profit=0;
         for(int i=0;i<prices.length;i++)
         {
-            int cost=prices[i]-mini;
-            profit=Math.max(profit,cost);
+            int margin=prices[i]-mini;
+            profit=Math.max(profit,margin);
             mini=Math.min(mini,prices[i]);
         }
         return profit;
