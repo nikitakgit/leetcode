@@ -6,11 +6,19 @@ class Solution {
     }
     public int helper(int i,int[] dp)
     {
+        if(dp[i]!=-1)
+        {
+            return dp[i];
+        }
         if(i<0) return 0;
         if(i==0) return 1;
-        if(dp[i]!=-1) return dp[i];
         int one=helper(i-1,dp);
-        int two=helper(i-2,dp);
+        int two=0;
+        if(i>1)
+        {
+        two=helper(i-2,dp);
+        }
+        
         return dp[i]=one+two;
     }
 }
