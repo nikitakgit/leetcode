@@ -1,6 +1,6 @@
 class Solution {
     public int coinChange(int[] coins, int amount) {
-        int[][] dp=new int[coins.length][amount+1];
+  int[][] dp=new int[coins.length][amount+1];
         for(int[] row:dp)
         {
             Arrays.fill(row,-1);
@@ -38,7 +38,6 @@ class Solution {
          dp[i][target]=Math.min(Take,notTake);
         return dp[i][target];
         
+    
     }
-    
-    
 }
