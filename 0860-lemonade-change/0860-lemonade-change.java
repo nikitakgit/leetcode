@@ -4,10 +4,13 @@ class Solution {
         int ten=0;
         for(int i=0;i<bills.length;i++)
         {
-            if(bills[i]==5) five+=1;
+            if(bills[i]==5)
+            {
+                five++;
+            }
             if(bills[i]==10)
             {
-                if(five>=1)
+                if(five>0)
                 {
                     five--;
                     ten++;
@@ -17,10 +20,11 @@ class Solution {
             }
             if(bills[i]==20)
             {
-                if(ten>=1 && five>=1)
+                if(five>0 && ten>0)
                 {
                     five--;
                     ten--;
+                    
                 }else if(five>=3)
                 {
                     five-=3;
