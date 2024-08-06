@@ -2,7 +2,7 @@ class Solution {
     public boolean checkValidString(String s) {
       
         int n=s.length();
-        Boolean[][] dp=new Boolean[n+1][n+1];
+        Boolean[][] dp=new Boolean[n][n];
         return helper(s,0,0,dp);
     }
     public boolean helper(String s,int i,int cnt,Boolean[][] dp)
