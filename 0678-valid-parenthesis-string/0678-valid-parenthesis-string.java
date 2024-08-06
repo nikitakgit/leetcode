@@ -1,33 +1,27 @@
 class Solution {
     public boolean checkValidString(String s) {
       
-        int n=s.length();
-        Boolean[][] dp=new Boolean[n][n];
-        return helper(s,0,0,dp);
-    }
-    public boolean helper(String s,int i,int cnt,Boolean[][] dp)
-    {
-        boolean result;
-        if(cnt<0) return false;
-        if(i==s.length())
+      int mini=0;
+        int maxi=0;
+        for(int i=0;i<s.length();i++)
         {
-            return cnt==0;
-        }
-        if(dp[i][cnt]!=null) return dp[i][cnt];
-        if(s.charAt(i)=='(')
-        {
-            result= helper(s,i+1,cnt+1,dp);
-        }
-        else if(s.charAt(i)==')')
-        {
-            result= helper(s,i+1,cnt-1,dp);
-        }else{
+            if(s.charAt(i)=='(')
+            {
+                mini+=1;
+                maxi+=1;
+            }else if(s.charAt(i)==')')
+            {
+                mini-=1;
+                maxi-=1;
+            }else{
+                mini-=1;
+                maxi+=1;
+            }
             
-        
-        result= helper(s,i+1,cnt+1,dp) || helper(s,i+1,cnt,dp) || helper(s,i+1,cnt-1,dp);
-        
+            if(mini<0) mini=0;
+            if(maxi<0) return false;
         }
-        dp[i][cnt]=result;
-        return result;
+        
+        return mini==0;
     }
 }
