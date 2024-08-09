@@ -14,7 +14,8 @@ class Solution {
        int m=mat.length;
         int n=mat[0].length;
         int[][] vis=new int[m][n];
-        int[][] dist=new int[m][n];
+        int[][] dis=new int[m][n];
+        
         Queue<Pair> q=new LinkedList<>();
         for(int i=0;i<m;i++)
         {
@@ -22,37 +23,37 @@ class Solution {
             {
                 if(mat[i][j]==0)
                 {
-                    vis[i][j]=1;
                     q.add(new Pair(i,j,0));
+                    vis[i][j]=1;
                 }else{
                     vis[i][j]=0;
                 }
             }
         }
         
-        int[] delRow={-1,0,1,0};
-        int[] delCol={0,1,0,-1};
-        
+        int[] dr={-1,0,1,0};
+        int[] dc={0,1,0,-1};
         while(!q.isEmpty())
         {
             Pair p=q.poll();
-            int row=p.f;
-            int col=p.s;
+            int r=p.f;
+            int c=p.s;
             int step=p.t;
             
-            dist[row][col]=step;
+            dis[r][c]=step;
             for(int i=0;i<4;i++)
             {
-                int nrow=row+delRow[i];
-                int ncol=col+delCol[i];
+                int nr=r+dr[i];
+                int nc=c+dc[i];
                 
-                if(nrow>=0 && nrow<m && ncol>=0 && ncol<n && vis[nrow][ncol]==0)
+                if(nr>=0 && nr<m && nc>=0 && nc<n && vis[nr][nc]==0)
                 {
-                    vis[nrow][ncol]=1;
-                    q.add(new Pair(nrow,ncol,step+1));
+                    vis[nr][nc]=1;
+                    q.add(new Pair(nr,nc,step+1));
                 }
             }
+            
         }
-        return dist;
+        return dis;
     }
 }
