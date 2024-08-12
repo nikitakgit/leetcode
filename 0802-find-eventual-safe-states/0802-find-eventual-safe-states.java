@@ -1,5 +1,5 @@
 class Solution {
-    private boolean dfsCheck(int node,int[][] graph,int[] vis,int[] pathVis,int[] check)
+    public boolean dfsCheck(int node,int[][] graph,int[] vis,int[] pathVis,int[] check)
     {
         vis[node]=1;
         pathVis[node]=1;
@@ -8,7 +8,7 @@ class Solution {
         {
             if(vis[it]==0)
             {
-                if(dfsCheck(it,graph,vis,pathVis,check)==true)
+                if(dfsCheck(it,graph,vis,pathVis,check))
                 {
                     return true;
                 }
@@ -17,13 +17,13 @@ class Solution {
                 return true;
             }
         }
+        
         check[node]=1;
         pathVis[node]=0;
         return false;
     }
     public List<Integer> eventualSafeNodes(int[][] graph) {
         int v=graph.length;
-        
         int[] vis=new int[v];
         int[] pathVis=new int[v];
         int[] check=new int[v];
@@ -35,14 +35,15 @@ class Solution {
                 dfsCheck(i,graph,vis,pathVis,check);
             }
         }
-        List<Integer> safeNodes=new ArrayList<>();
+        
+        List<Integer> ans=new ArrayList<>();
         for(int i=0;i<v;i++)
         {
             if(check[i]==1)
             {
-                safeNodes.add(i);
+                ans.add(i);
             }
         }
-        return safeNodes;
+        return ans;
     }
 }
