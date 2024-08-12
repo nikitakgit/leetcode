@@ -1,34 +1,34 @@
 class Solution {
     public boolean canFinish(int V, int[][] prerequisites) {
-        int n=prerequisites.length;
         ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
         for(int i=0;i<V;i++)
         {
             adj.add(new ArrayList<>());
         }
-        
+        int n=prerequisites.length;
         for(int i=0;i<n;i++)
         {
             adj.get(prerequisites[i][0]).add(prerequisites[i][1]);
         }
         
-        int[] indeg=new int[V];
+        int[] indegree=new int[V];
         for(int i=0;i<V;i++)
         {
             for(int it:adj.get(i))
             {
-                indeg[it]++;
+                indegree[it]++;
             }
         }
         
         Queue<Integer> q=new LinkedList<>();
         for(int i=0;i<V;i++)
         {
-            if(indeg[i]==0)
+            if(indegree[i]==0)
             {
                 q.add(i);
             }
         }
+        
         List<Integer> topo=new ArrayList<>();
         while(!q.isEmpty())
         {
@@ -36,8 +36,8 @@ class Solution {
             topo.add(node);
             for(int it:adj.get(node))
             {
-                indeg[it]--;
-                if(indeg[it]==0)
+                indegree[it]--;
+                if(indegree[it]==0)
                 {
                     q.add(it);
                 }
