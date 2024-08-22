@@ -1,28 +1,27 @@
 class Solution {
     public String frequencySort(String s) {
-       Map<Character, Integer> charFreq = new HashMap<>();
-        for (char c : s.toCharArray()) {
-            charFreq.put(c, charFreq.getOrDefault(c, 0) + 1);
-        }
-
-        // Declare a max heap for sorting the map values based on frequency
-        PriorityQueue<Map.Entry<Character, Integer>> maxHeap =
-                new PriorityQueue<>((a, b) -> Integer.compare(b.getValue(), a.getValue()));
-        maxHeap.addAll(charFreq.entrySet());
-
-        // Start storing the chars in ans frequency-wise
-        StringBuilder result = new StringBuilder();
-        while (!maxHeap.isEmpty()) {
-            Map.Entry<Character, Integer> entry = maxHeap.poll();
-            char ch = entry.getKey();
-            int freq = entry.getValue();
-
-            // Append the current char (freq) times
-            for (int i = 0; i < freq; i++) {
-                result.append(ch);
+      HashMap<Character,Integer> map=new HashMap<>();
+      for(char c:s.toCharArray())
+      {
+          map.put(c,map.getOrDefault(c,0)+1);
+      }
+        
+        PriorityQueue<Map.Entry<Character,Integer>> pq=new PriorityQueue<>((a,b) -> b.getValue()-a.getValue());
+        
+        pq.addAll(map.entrySet());
+        
+        StringBuilder ans=new StringBuilder();
+        while(!pq.isEmpty())
+        {
+            Map.Entry<Character,Integer> e=pq.poll();
+            char key=e.getKey();
+            int val=e.getValue();
+            
+            for(int i=0;i<val;i++)
+            {
+                ans.append(key);
             }
         }
-
-        return result.toString(); 
+        return ans.toString();
     }
 }
