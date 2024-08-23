@@ -6,7 +6,6 @@ class Solution {
         {
             adj.add(new ArrayList<>());
         }
-        
         for(int i=0;i<isConnected.length;i++)
         {
             for(int j=0;j<isConnected.length;j++)
