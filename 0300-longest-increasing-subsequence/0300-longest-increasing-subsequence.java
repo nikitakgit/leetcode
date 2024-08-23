@@ -6,17 +6,22 @@ class Solution {
         {
             Arrays.fill(a,-1);
         }
-        return helper(0,-1,nums,dp);
+       return helper(0,-1,nums,dp);
     }
-    public int helper(int i,int prev,int[] nums,int[][] dp)
+    public int helper(int i,int prev_in,int[] nums,int[][] dp)
     {
-        if(i==nums.length) return 0;
-        if(dp[i][prev+1]!=-1) return dp[i][prev+1];
-        int len=0+helper(i+1,prev,nums,dp);
-        if(prev==-1 || nums[i]>nums[prev])
+        if(i>=nums.length)
+        {
+            return 0;
+        }
+        
+        if(dp[i][prev_in+1]!=-1) return dp[i][prev_in+1];
+        int len=0;
+        len=0+helper(i+1,prev_in,nums,dp);
+        if(prev_in==-1 || nums[i]>nums[prev_in])
         {
             len=Math.max(len,1+helper(i+1,i,nums,dp));
         }
-        return dp[i][prev+1]=len;
+        return dp[i][prev_in+1]=len;
     }
 }
