@@ -1,15 +1,14 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int[] ans={-1,-1};
-        ans[0]=search(nums,target,true);
+        ans[0]=find(nums,target,true);
         if(ans[0]!=-1)
         {
-            ans[1]=search(nums,target,false);
+            ans[1]=find(nums,target,false);
         }
         return ans;
     }
-    
-    public int search(int[] nums,int target,boolean findFirstIndex)
+    public int find(int[] nums,int target,boolean findFirst)
     {
         int s=0;
         int e=nums.length-1;
@@ -17,15 +16,15 @@ class Solution {
         while(s<=e)
         {
             int mid=s+(e-s)/2;
-            if(target<nums[mid])
-            {
-                e=mid-1;
-            }else if(target>nums[mid])
+            if(nums[mid]<target)
             {
                 s=mid+1;
+            }else if(nums[mid]>target)
+            {
+                e=mid-1;
             }else{
                 ans=mid;
-                if(findFirstIndex)
+                if(findFirst)
                 {
                     e=mid-1;
                 }else{
