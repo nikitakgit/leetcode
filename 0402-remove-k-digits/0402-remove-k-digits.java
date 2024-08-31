@@ -1,49 +1,37 @@
 class Solution {
     public String removeKdigits(String num, int k) {
-                // Stack to store the digits
-        Stack<Character> numStack = new Stack<>();
-        
-        // Iterating through each digit in the number
-        for (char digit : num.toCharArray()) {
-            // While there are remaining removals (k) and the stack is not empty and the current digit is smaller than the top of the stack
-            while (k > 0 && !numStack.isEmpty() && digit < numStack.peek()) {
-                // Remove digits from the stack
-                numStack.pop();
-                k--;
+      int n = num.length();
+        if(k>=n)return "0";
+        if (k == 0)
+            return num;
+
+
+        Stack<Character> st = new Stack<>();
+        st.push(num.charAt(0));
+        for(int i=1; i<n; i++){
+            while(!st.isEmpty() && k>0 && st.peek()>num.charAt(i)){
+                --k;
+                st.pop();
             }
-            // Push the current digit to the stack
-            numStack.push(digit);
+            st.push(num.charAt(i));
+            if(st.size()==1 && st.peek()=='0'){
+                st.pop();
+            }
         }
-        
-        // After iterating through the number, if there are still remaining removals, remove digits from the stack
-        while (k > 0 && !numStack.isEmpty()) {
-            numStack.pop();
+        while(!st.isEmpty() && k>0){
             k--;
+            st.pop();
         }
-
-        // Construct the result string by popping digits from the stack
-        StringBuilder temp = new StringBuilder();
-        while (!numStack.isEmpty()) {
-            temp.append(numStack.pop());
-        }
-        // Reverse the result string to get the correct order
-        temp.reverse();
-
-        // Remove leading zeros and construct the final result
-        int m = temp.length();
+       
         StringBuilder result = new StringBuilder();
-        int foundNonZero = 0;
-        for (int i = 0; i < m; i++) {
-            if (temp.charAt(i) == '0' && foundNonZero == 0) {
-                continue;
-            } else {
-                result.append(temp.charAt(i));
-                foundNonZero = 1;
-            }
+        while (!st.isEmpty()) {
+            result.append(st.pop());
         }
-        // If the result is empty, return "0"
-        if (result.length() == 0)
-            result.append('0');
+        result.reverse();
+        if(result.length()==0){
+            return "0";
+        }
         return result.toString();
+        
     }
 }
