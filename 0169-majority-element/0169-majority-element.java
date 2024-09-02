@@ -6,7 +6,7 @@ class Solution {
             map.put(i,map.getOrDefault(i,0)+1);
         }
         
-        int k=(int)Math.floor(nums.length/2);
+        int k=nums.length/2;
         int ans=0;
         for(Map.Entry<Integer,Integer> e:map.entrySet())
         {
