@@ -17,10 +17,14 @@ class Solution {
             cnt++;
             temp=temp.next;
         }
-         temp=head;
+        temp=head;
         ListNode prev=null;
         int pos=cnt-n;
-        if(pos==0) return head.next;
+        if(pos==0)
+        {
+            return head.next;
+        }
+        
         for(int i=0;i<pos;i++)
         {
             prev=temp;
