@@ -25,13 +25,13 @@ class Solution {
             return head.next;
         }
         
-        for(int i=0;i<pos;i++)
+        for(int i=0;i<pos-1;i++)
         {
-            prev=temp;
+            
             temp=temp.next;
         }
-        prev.next=temp.next;
-        temp=null;
+        temp.next=temp.next.next;
+        
         return head;
     }
 }
