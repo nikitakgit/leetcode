@@ -16,20 +16,20 @@
 class Solution {
     public TreeNode insertIntoBST(TreeNode root, int val) {
        if(root==null) return new TreeNode(val);
-        TreeNode cur=root;
+        TreeNode curr=root;
         while(true)
         {
-            if(cur.val<=val)
+            if(curr.val<=val)
             {
-                if(cur.right!=null) cur=cur.right;
+                if(curr.right!=null) curr=curr.right;
                 else{
-                    cur.right=new TreeNode(val);
+                    curr.right=new TreeNode(val);
                     break;
                 }
             }else{
-                if(cur.left!=null) cur=cur.left;
+                if(curr.left!=null) curr=curr.left;
                 else{
-                    cur.left=new TreeNode(val);
+                    curr.left=new TreeNode(val);
                     break;
                 }
             }
