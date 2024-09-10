@@ -4,24 +4,23 @@ class Solution {
         List<Integer> b=new ArrayList<>();
         List<Integer> c=new ArrayList<>();
         
-        for(int num:nums)
+        for(int i:nums)
         {
-            if(num>0) a.add(num);
-            else b.add(num);
+            if(i>0) a.add(i);
+            else b.add(i);
         }
         
-        int count=0,c1=0,c2=0;
+        int cnt=0,c1=0,c2=0;
         for(int num:nums)
         {
-            if(count%2==0)
-            {
-                int n=a.get(c1++);
+            if(cnt%2==0)
+            {   int n=a.get(c1++);
                 c.add(n);
             }else{
                 int n=b.get(c2++);
                 c.add(n);
             }
-            count++;
+            cnt++;
         }
         
         int[] ans=new int[c.size()];
@@ -30,5 +29,6 @@ class Solution {
             ans[i]=c.get(i);
         }
         return ans;
+        
     }
 }
