@@ -24,22 +24,22 @@ class Solution {
         TreeNode dummy=root;
         while(root!=null)
         {
-            if(root.val>key)
+            if(root.val<key)
             {
-                if(root.left!=null && root.left.val==key)
-                {
-                    root.left=helper(root.left);
-                    break;
-                }else{
-                    root=root.left;
-                }
-            }else{
                 if(root.right!=null && root.right.val==key)
                 {
                     root.right=helper(root.right);
                     break;
                 }else{
                     root=root.right;
+                }
+            }else{
+                if(root.left!=null && root.left.val==key)
+                {
+                    root.left=helper(root.left);
+                    break;
+                }else{
+                    root=root.left;
                 }
             }
         }
@@ -62,10 +62,8 @@ class Solution {
     }
     public TreeNode findLastRight(TreeNode root)
     {
-        if(root.right==null)
-        {
-            return root;
-        }
+        if(root.right==null) return root;
         return findLastRight(root.right);
+        
     }
 }
