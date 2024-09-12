@@ -13,6 +13,7 @@
  *     }
  * }
  */
+
 class Solution {
     public boolean findTarget(TreeNode root, int k) {
         HashSet<Integer> set=new HashSet<>();
@@ -27,4 +28,5 @@ class Solution {
             
             return findkTarget(root.left,k,set) || findkTarget(root.right,k,set);
         }
+    
 }
