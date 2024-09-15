@@ -2,27 +2,28 @@ class Solution {
     public int change(int amount, int[] coins) {
         int n=coins.length;
         int[][] dp=new int[n][amount+1];
-        for(int[] a: dp)
+        for(int[] a:dp)
         {
             Arrays.fill(a,-1);
         }
         return helper(n-1,coins,amount,dp);
     }
-    public int helper(int i,int[] coins,int target,int[][] dp)
+    public int helper(int i,int[] coins,int amount,int[][] dp)
     {
-        if(target==0)
+        if(amount==0)
         {
-             
             return 1;
         }
-        if(i<0 || target<0) return 0;
-        if(dp[i][target]!=-1) return dp[i][target];
-        int notTake=helper(i-1,coins,target,dp);
-        int Take=0;
-        if(coins[i]<=target)
+        
+        if(i<0 || amount<0) return 0;
+        if(dp[i][amount]!=-1) return dp[i][amount];
+        int notTake=helper(i-1,coins,amount,dp);
+        int take=0;
+        if(coins[i]<=amount)
         {
-            Take=helper(i,coins,target-coins[i],dp);
+            take=helper(i,coins,amount-coins[i],dp);
         }
-        return dp[i][target]=Take+notTake;
+        
+        return dp[i][amount]=take+notTake;
     }
 }
