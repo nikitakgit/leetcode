@@ -7,30 +7,24 @@ class Solution {
             Arrays.fill(a,-1);
         }
         int ans=helper(n-1,coins,amount,dp);
-        if(ans>=(int)Math.pow(10,9))
-        {
-            return -1;
-        }
-        return ans;
+        if(ans>=(int)Math.pow(10,9)) return -1;
+        else return ans;
     }
-    
-    public int helper(int ind,int[] coins,int target,int[][] dp)
+    public int helper(int i,int[] coins,int amount,int[][] dp)
     {
-        if(ind==0)
+        if(i==0)
         {
-            if(target%coins[ind]==0) return target/coins[ind];
+            if(amount%coins[i]==0) return amount/coins[i];
             else return (int)Math.pow(10,9);
         }
-        if(dp[ind][target]!=-1)
-        {
-            return dp[ind][target];
-        }
-        int notTake=helper(ind-1,coins,target,dp);
+        if(dp[i][amount]!=-1) return dp[i][amount];
+        int notTake=helper(i-1,coins,amount,dp);
         int take=Integer.MAX_VALUE;
-        if(coins[ind]<=target)
+        if(coins[i]<=amount)
         {
-            take=1+helper(ind,coins,target-coins[ind],dp);
+            take=1+helper(i,coins,amount-coins[i],dp);
         }
-        return dp[ind][target]=Math.min(take,notTake);
+        return dp[i][amount]=Math.min(take,notTake);
     }
 }
+
