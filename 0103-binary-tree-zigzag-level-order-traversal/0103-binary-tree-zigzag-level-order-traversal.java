@@ -20,22 +20,20 @@ class Solution {
         
         Queue<TreeNode> q=new LinkedList<>();
         q.offer(root);
-        boolean flag=false;
-        
+        boolean leftToRight=false;
         while(!q.isEmpty())
         {
             int size=q.size();
-            ArrayList<Integer> temp=new ArrayList<>();
+            List<Integer> list=new ArrayList<>();
             for(int i=0;i<size;i++)
             {
                 if(q.peek().left!=null) q.offer(q.peek().left);
-                if(q.peek().right!=null) q.offer(q.peek().right); 
-                
-                temp.add(q.poll().val);
+                if(q.peek().right!=null) q.offer(q.peek().right);
+                list.add(q.poll().val);
             }
-            flag=!flag;
-            if(!flag) Collections.reverse(temp);
-            ans.add(temp);
+            leftToRight=!leftToRight;
+            if(!leftToRight) Collections.reverse(list);
+            ans.add(list);
         }
         return ans;
     }
