@@ -14,7 +14,8 @@ class Solution {
                 ind=i+1;
             }
         }
-        return (total<0) ? -1:ind;
+        
+        return total<0?-1:ind;
     }
 }
 
