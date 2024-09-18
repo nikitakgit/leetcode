@@ -15,17 +15,17 @@
  */
 class Solution {
     int ans;
-    public int countCoin(TreeNode root)
+    public int helper(TreeNode root)
     {
         if(root==null) return 0;
-        int l=countCoin(root.left);
-        int r=countCoin(root.right);
+        int l=helper(root.left);
+        int r=helper(root.right);
         ans+=Math.abs(l)+Math.abs(r);
         return (root.val-1)+l+r;
     }
     public int distributeCoins(TreeNode root) {
         ans=0;
-        countCoin(root);
+        helper(root);
         return ans;
     }
 }
