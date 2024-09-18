@@ -6,7 +6,6 @@ class Solution {
         {
             pq.offer(nums[i]);
         }
-        
         while(cnt>1)
         {
             pq.poll();
