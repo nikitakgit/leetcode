@@ -15,52 +15,51 @@
  */
 class Tuple{
     TreeNode node;
-    int row;
-    int col;
+    int vertical;
+    int level;
     
-    Tuple(TreeNode node,int row,int col)
+    Tuple(TreeNode node,int vertical,int level)
     {
         this.node=node;
-        this.row=row;
-        this.col=col;
+        this.vertical=vertical;
+        this.level=level;
     }
 }
 class Solution {
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-        TreeMap<Integer,TreeMap<Integer,PriorityQueue<Integer>>> map=new TreeMap<>();
+       TreeMap<Integer,TreeMap<Integer,PriorityQueue<Integer>>> map=new TreeMap<>();
         Queue<Tuple> q=new LinkedList<>();
         q.offer(new Tuple(root,0,0));
         while(!q.isEmpty())
         {
             Tuple t=q.poll();
             TreeNode node=t.node;
-            int x=t.row;
-            int y=t.col;
-            if(!map.containsKey(x))
+            int ver=t.vertical;
+            int level=t.level;
+            if(!map.containsKey(ver))
             {
-                map.put(x,new TreeMap<>());
+                map.put(ver,new TreeMap<>());
             }
-            if(!map.get(x).containsKey(y))
+            if(!map.get(ver).containsKey(level))
             {
-                map.get(x).put(y,new PriorityQueue<>());
+                map.get(ver).put(level,new PriorityQueue<>());
             }
-            
-            map.get(x).get(y).offer(node.val);
+            map.get(ver).get(level).offer(node.val);
             if(node.left!=null)
             {
-                q.offer(new Tuple(node.left,x-1,y+1));
+                q.offer(new Tuple(node.left,ver-1,level+1));
             }
             if(node.right!=null)
             {
-                q.offer(new Tuple(node.right,x+1,y+1));
-            }
+                q.offer(new Tuple(node.right,ver+1,level+1));
+            } 
         }
         
         List<List<Integer>> list=new ArrayList<>();
-        for(TreeMap<Integer,PriorityQueue<Integer>> ys:map.values())
+        for(TreeMap<Integer,PriorityQueue<Integer>> e:map.values())
         {
-            list.add(new ArrayList<>());
-            for(PriorityQueue<Integer> nodes:ys.values())
+           list.add(new ArrayList<>());
+            for(PriorityQueue<Integer> nodes:e.values())
             {
                 while(!nodes.isEmpty())
                 {
