@@ -5,39 +5,38 @@ class Solution {
         }
 
         int low = 1, high = (int) 1e9;
-        while (low < high) {
+        int ans=high;
+        while (low <=high) {
             int mid = low + (high - low) / 2;
-
-            if (isPossibleBouquets(bloomDay, m, k, mid)) {
-                high = mid;
-            } else {
-                low = mid + 1;
-            }
-        };
-
-        return low;
-    }
-    private boolean isPossibleBouquets(int[] bloomDay, int m, int k, int day) {
-        int total = 0;
-
-        for (int i = 0; i < bloomDay.length; i++) {
-            int count = 0;
-            while (i < bloomDay.length && count < k && bloomDay[i] <= day) {
-                count++;
-                i++;
-            }
-
-            if (count == k) {
-                total++;
-                i--;
-            }
-
-            if (total >= m) {
-                return true;
+            if(isPossibleBouquets(bloomDay,m,k,mid)==true)
+            {
+                ans=mid;
+                high=mid-1;
+            }else{
+                low=mid+1;
             }
         }
-
-        return false;
+        return ans;
+    }
+    private boolean isPossibleBouquets(int[] bloomDay, int m, int k, int day) {
+        int cnt=0,noOfB=0;
+        for(int i=0;i<bloomDay.length;i++)
+        {
+            if(bloomDay[i]<=day)
+            {
+                cnt++;
+                if(cnt==k)
+                {
+                    noOfB++;
+                    cnt=0;
+                }
+            }else{
+                cnt=0;
+            }
+        }
+        
+        if(noOfB>=m) return true;
+        else return false;
     
     }
 }
