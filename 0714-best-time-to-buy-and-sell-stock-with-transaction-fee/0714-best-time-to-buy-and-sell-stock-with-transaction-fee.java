@@ -10,7 +10,7 @@ class Solution {
     }
     public int helper(int i,int buy,int fee,int[] prices,int n,int[][] dp)
     {
-        if(i>=n) return 0;
+        if(i==n) return 0;
         int profit=0;
         if(dp[i][buy]!=-1) return dp[i][buy];
         if(buy==1)
