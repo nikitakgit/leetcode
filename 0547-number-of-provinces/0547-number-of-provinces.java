@@ -4,8 +4,9 @@ class Solution {
        ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
         for(int i=0;i<isConnected.length;i++)
         {
-            adj.add(new ArrayList<>());
+            adj.add(new ArrayList<Integer>());
         }
+        
         for(int i=0;i<isConnected.length;i++)
         {
             for(int j=0;j<isConnected.length;j++)
@@ -18,26 +19,27 @@ class Solution {
             }
         }
         
-        int[] vis=new int[adj.size()];
+        boolean[] vis=new boolean[adj.size()];
         int cnt=0;
         for(int i=0;i<adj.size();i++)
         {
-            if(vis[i]==0)
+            if(vis[i]==false)
             {
                 cnt++;
-                dfs(i,vis,adj);
+                dfs(i,adj,vis);
             }
         }
         return cnt;
     }
-    public void dfs(int node,int[] vis,ArrayList<ArrayList<Integer>> adj)
+    public void dfs(int node,ArrayList<ArrayList<Integer>> adj,boolean[] visited)
     {
-        vis[node]=1;
+        
+        visited[node]=true;
         for(int i:adj.get(node))
         {
-            if(vis[i]==0)
+            if(visited[i]==false)
             {
-                dfs(i,vis,adj);
+                dfs(i,adj,visited);
             }
         }
     }
