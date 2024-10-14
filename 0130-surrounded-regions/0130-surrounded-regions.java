@@ -1,15 +1,14 @@
 class Solution {
-   
-    
     public void solve(char[][] board) {
-       int m=board.length;
+       int[] dr={-1,0,1,0};
+        int[] dc={0,1,0,-1};
+        int m=board.length;
         int n=board[0].length;
         int[][] vis=new int[m][n];
-        int[] dr={-1,0,1,0};
-        int[] dc={0,1,0,-1};
+        
         for(int i=0;i<m;i++)
         {
-            if(vis[i][0]==0 && board[i][0]=='O' )
+            if(vis[i][0]==0 && board[i][0]=='O')
             {
                 dfs(i,0,board,vis,dr,dc);
             }
@@ -43,22 +42,21 @@ class Solution {
         }
         
     }
-    
     public void dfs(int r,int c,char[][] board,int[][] vis,int[] dr,int[] dc)
     {
         vis[r][c]=1;
         int m=board.length;
         int n=board[0].length;
-        
         for(int i=0;i<4;i++)
         {
             int nr=r+dr[i];
             int nc=c+dc[i];
             
-            if(nr>=0 && nr<m && nc>=0 && nc<n && vis[nr][nc]==0 && board[nr][nc]=='O')
+            if(nr>=0 && nc>=0 && nr<m && nc<n && vis[nr][nc]==0 && board[nr][nc]=='O')
             {
                 dfs(nr,nc,board,vis,dr,dc);
             }
         }
     }
+   
 }
