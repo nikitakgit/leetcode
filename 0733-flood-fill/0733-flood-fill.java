@@ -1,27 +1,26 @@
 class Solution {
    
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-       int iniCol=image[sr][sc];
-        int[][] ans=image;
-        int[] dr={-1,0,1,0};
+       int[] dr={-1,0,1,0};
         int[] dc={0,1,0,-1};
-        dfs(sr,sc,ans,image,color,dr,dc,iniCol);
+        int[][] ans=image;
+        int iniColor=image[sr][sc];
+        dfs(sr,sc,ans,color,iniColor,image,dr,dc);
         return ans;
     }
-    public void dfs(int r,int c,int[][] ans,int[][] image,int newCol,int[] dr,int[] dc,int iniCol)
+    public void dfs(int r,int c,int[][] ans,int nColor,int iniColor,int[][] image,int[] dr,int[] dc)
     {
-        ans[r][c]=newCol;
-        int n=image.length;
-        int m=image[0].length;
-        
+        ans[r][c]=nColor;
+        int m=image.length;
+        int n=image[0].length;
         for(int i=0;i<4;i++)
         {
             int nr=r+dr[i];
             int nc=c+dc[i];
-            
-            if(nr>=0 && nr<n && nc>=0 && nc<m && image[nr][nc]==iniCol && ans[nr][nc]!=newCol)
+            if(nr>=0 && nc>=0 && nr<m && nc<n && image[nr][nc]==iniColor && ans[nr][nc]!=nColor)
             {
-                dfs(nr,nc,ans,image,newCol,dr,dc,iniCol);
+                
+                dfs(nr,nc,ans,nColor,iniColor,image,dr,dc);
             }
         }
     }
