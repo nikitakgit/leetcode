@@ -2,8 +2,7 @@ class Pair{
     int r;
     int c;
     int t;
-    
-    public Pair(int r,int c,int t)
+    Pair(int r,int c,int t)
     {
         this.r=r;
         this.c=c;
@@ -12,12 +11,14 @@ class Pair{
 }
 class Solution {
     public int orangesRotting(int[][] grid) {
-     int m=grid.length;
+        int m=grid.length;
         int n=grid[0].length;
+        
         int[][] vis=new int[m][n];
         
         Queue<Pair> q=new LinkedList<>();
         int cntFresh=0;
+        
         for(int i=0;i<m;i++)
         {
             for(int j=0;j<n;j++)
@@ -53,19 +54,14 @@ class Solution {
             {
                 int nr=r+dr[i];
                 int nc=c+dc[i];
-                
-                if(nr>=0 && nr<m && nc>=0 && nc<n && vis[nr][nc]==0 && grid[nr][nc]==1)
+                if(nr>=0 && nc>=0 && nr<m && nc<n && vis[nr][nc]==0 && grid[nr][nc]==1)
                 {
                     q.add(new Pair(nr,nc,t+1));
                     vis[nr][nc]=2;
                     cnt++;
                 }
             }
-            
         }
-        if(cnt!=cntFresh) return -1;
-        return tm;
-     
+        return cntFresh==cnt?tm:-1;
     }
-    
 }
