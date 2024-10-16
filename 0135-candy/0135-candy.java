@@ -6,7 +6,6 @@ class Solution {
         
         l[0]=1;
         r[n-1]=1;
-        
         for(int i=1;i<n;i++)
         {
             if(ratings[i]>ratings[i-1])
