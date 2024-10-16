@@ -10,13 +10,11 @@ class Solution {
             for(int i=l;i<=r;i++)
             {
                 farthest=Math.max(farthest,i+nums[i]);
-                
             }
             
             l=r+1;
             r=farthest;
             jump++;
-            
         }
         return jump;
     }
