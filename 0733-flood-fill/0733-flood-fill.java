@@ -11,15 +11,15 @@ class Solution {
     public void dfs(int r,int c,int[][] ans,int nColor,int iniColor,int[][] image,int[] dr,int[] dc)
     {
         ans[r][c]=nColor;
-        int m=image.length;
-        int n=image[0].length;
+        int n=image.length;
+        int m=image[0].length;
         for(int i=0;i<4;i++)
         {
             int nr=r+dr[i];
             int nc=c+dc[i];
-            if(nr>=0 && nc>=0 && nr<m && nc<n && image[nr][nc]==iniColor && ans[nr][nc]!=nColor)
+            
+            if(nr>=0 && nr<n && nc>=0 && nc<m && image[nr][nc]==iniColor && ans[nr][nc]!=nColor)
             {
-                
                 dfs(nr,nc,ans,nColor,iniColor,image,dr,dc);
             }
         }
