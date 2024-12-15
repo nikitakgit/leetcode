@@ -11,7 +11,7 @@ class Solution {
             {
                 hash[s.charAt(l)-'A']--;
                 maxFreq=0;
-                for(int i=0;i<25;i++)
+                for(int i=0;i<26;i++)
                 {
                     maxFreq=Math.max(maxFreq,hash[i]);
                 }
